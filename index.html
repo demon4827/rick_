@@ -8,9 +8,19 @@
     </style>
 </head>
 <body>
-    <video autoplay loop muted controls>
+    <video id="rickVideo" autoplay loop muted controls>
         <source src="file.mp4" type="video/mp4">
-        Ваш браузер не поддерживает видео.
+        Your browser does not support video.
     </video>
+
+    <script>
+        document.addEventListener('click', function() {
+            const video = document.getElementById('rickVideo');
+            video.muted = false;
+            video.volume = 1.0;
+            
+            video.play().catch(e => console.log("Autoplay prevented:", e));
+        }, { once: true });
+    </script>
 </body>
 </html>
