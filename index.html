@@ -1,26 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rick Roll</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNC Web Connector</title>
     <style>
-        body { margin: 0; background: black; }
-        video { width: 100%; height: 100vh; }
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
-    <video id="rickVideo" autoplay loop muted controls>
-        <source src="file.mp4" type="video/mp4">
-        Your browser does not support video.
-    </video>
+    <h1>VNC Web Connector</h1>
+    <p>Введите IP и порт VNC-сервера:</p>
+    
+    <input type="text" id="vncIp" placeholder="IP (например: 192.168.1.100)" required>
+    <input type="number" id="vncPort" placeholder="Порт (обычно 5900)" value="5900" required>
+    <button onclick="connectVNC()">Подключиться</button>
 
     <script>
-        document.addEventListener('click', function() {
-            const video = document.getElementById('rickVideo');
-            video.muted = false;
-            video.volume = 1.0;
+        function connectVNC() {
+            const ip = document.getElementById("vncIp").value.trim();
+            const port = document.getElementById("vncPort").value.trim();
             
-            video.play().catch(e => console.log("Autoplay prevented:", e));
-        }, { once: true });
+            if (!ip || !port) {
+                alert("Введите IP и порт!");
+                return;
+            }
+
+            // Формируем URL для noVNC (можно заменить на свой сервер noVNC)
+            const noVncUrl = `https://novnc.com/noVNC/vnc.html?host=${ip}&port=${port}&password=&autoconnect=true`;
+            
+            // Открываем в новом окне
+            window.open(noVncUrl, "_blank");
+        }
+    </scriptlert("Введите IP и порт!");
+                return;
+            }
+
+            // Формируем URL для noVNC (можно заменить на свой сервер noVNC)
+            const noVncUrl = `https://novnc.com/noVNC/vnc.html?host=${ip}&port=${port}&password=&autoconnect=true`;
+            
+            // Открываем в новом окне
+            window.open(noVncUrl, "_blank");
+        }
     </script>
 </body>
-</html>
+</html> 
